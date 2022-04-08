@@ -26,11 +26,10 @@ with st.form("my_form"):
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if submitted:
-        # creates a new df and unions with existing data in Snowflake, writes to table
+        # creates a new df and appends to the DB
         st.write("name:", name_val, "| age:", age_val, "| job:", job_val, "| insider:", insider_val)
         newEmployeeDf=session.createDataFrame([Row(name=name_val, age=age_val, job=job_val, insider=insider_val)])
-        employeeDf = employeeDf.union(newEmployeeDf)
-        employeeDf.write.mode("append").saveAsTable("employee")
+        newEmployeeDf.write.mode("append").saveAsTable("employee")
 
 if st.button('Delete database'):
     employeeTable = session.table("employee")
@@ -38,4 +37,4 @@ if st.button('Delete database'):
 
 # refreshes automatically every time the data frame changes
 st.write("Employees database:")
-st.write(employeeDf.toPandas())e
+st.write(employeeDf.toPandas())
