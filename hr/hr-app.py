@@ -11,9 +11,6 @@ session = Session.builder.configs(connection_parameters).create()
 # get Snowflake table data
 employeeDf = session.table("employee")
 
-# used to trigger refresh of the rendered table
-refresh_employee_db_display = True
-
 # main entry form
 with st.form("my_form"):
     st.write("Enter employee details")
@@ -33,17 +30,12 @@ with st.form("my_form"):
         st.write("name:", name_val, "| age:", age_val, "| job:", job_val, "| insider:", insider_val)
         newEmployeeDf=session.createDataFrame([Row(name=name_val, age=age_val, job=job_val, insider=insider_val)])
         employeeDf = employeeDf.union(newEmployeeDf)
-        employeeDf.write.mode("overwrite").saveAsTable("employee")
-        refresh_employee_db_display = True
+        employeeDf.write.mode("append").saveAsTable("employee")
 
 if st.button('Delete database'):
     employeeTable = session.table("employee")
     employeeTable.delete()
-    refresh_employee_db_display = True
 
-# refreshes every time new record gets added or table is deleted
-while refresh_employee_db_display == True:
-    employeeDf = session.table("employee")
-    st.write("Employees database:")
-    st.write(employeeDf.toPandas())
-    refresh_employee_db_display = False
+# refreshes automatically every time the data frame changes
+st.write("Employees database:")
+st.write(employeeDf.toPandas())e
