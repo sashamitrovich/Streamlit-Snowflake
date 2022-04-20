@@ -1,4 +1,4 @@
-# Streamlite for Snowflake
+# Streamlit for Snowflake
 Demonstrating how easy it is to build Stramlit applications on Snowflake
 
 ## Data capture application
