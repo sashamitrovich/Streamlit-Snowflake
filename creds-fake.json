@@ -4,5 +4,5 @@
     "password": "*******",
     "warehouse": "<Snowflake warehouse name>",
     "database": "<DB name>",
-    "schema": "<schema nanme>"
+    "schema": "<schema name>"
   }
