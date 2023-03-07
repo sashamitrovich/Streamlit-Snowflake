@@ -3,25 +3,20 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-from snowflake.snowpark import Session, Row
-from snowflake.snowpark.functions import call_udf, col
+from snowflake.snowpark import Session
+from snowflake.snowpark.functions import col
 from snowflake.snowpark import functions as f
+
 
 import json
 # import uuid
 
 # connect to Snowflake
-with open('esg-creds.json') as fl:
+with open('../creds/esg-creds.json') as fl:
     connection_parameters = json.load(fl)  
 session = Session.builder.configs(connection_parameters).create()
 
-
-with open('stock-creds.json') as fl:
-    connection_parameters = json.load(fl)  
-sessionStock = Session.builder.configs(connection_parameters).create()
-
 st.write("# ESG Investment Analyzer :sunglasses:")
-
 
 # get ESG data from the marketplace
 scoreDf = session.table("TRIAL_SCO_ESG_262") # lazy evaluation
@@ -45,14 +40,12 @@ scoreWithRatingDf= scoreDf.withColumn('rating',
         'invalid'
     )
 )
-
  
 with open ('style.css') as fcss:
 			st.markdown(f'<style>{fcss.read()}</style>', unsafe_allow_html=True)
 
 
 # selectors
-
 col1, col2 = st.columns([3,1])
 with col1:
     company  = st.selectbox(
@@ -75,8 +68,6 @@ compayEsgRating=companyDf.select(col('rating')).collect()[0][0]
 companyTicker=companyDf.select(col('"ticker"')).collect()[0][0]
 
 
-# TO-DO: get the data for the chart
-
 if column=="Region":
     columnName="exch_region"
 elif column=="Sector":
@@ -89,7 +80,6 @@ companySelectedColumnValue = companyDf.select(col('"'+ columnName+ '"')).collect
 scoreWithRatingFilteredDf = scoreWithRatingDf.filter(col('"'+ columnName+ '"') == companySelectedColumnValue)
 
 # print the chart
-# df_prices.group_by(col("product_id")).sum(col("amount"))
 aggDf=scoreWithRatingFilteredDf.group_by(col('rating')).agg([f.avg('"esg"').alias("Count")])
  
 
@@ -113,7 +103,6 @@ with col4:
 
 
 # show the breakdown of company's ESG scores
-
 col5, col6, col7 = st.columns(3)
 
 with col5:
@@ -125,11 +114,9 @@ with col6:
 with col7:
     st.metric(label="ESG G", value=companyEsgG, delta="")
 
+stockDf=session.table('economy_data_atlas.economy.usindssp2020')
 
-stockDf=sessionStock.table('STOCK_HISTORY')
-
-stockFiltered = stockDf.filter(col('symbol') == companyTicker).select(col('date'), col('close').alias('price')).sort(col('date').asc()).filter(col('date') > '2018-01-01')
-
+stockFiltered = stockDf.filter(col('"Company Ticker"') == companyTicker).filter( col('"Indicator Name"') == 'Close').select(col('"Date"').alias('date'), col('"Value"').alias('price')).sort(col('"Date"').asc()).filter(col('"Date"') > '2001-01-01')
 
 c2 = alt.Chart(stockFiltered.toPandas()).mark_area(
     color="lightblue",
