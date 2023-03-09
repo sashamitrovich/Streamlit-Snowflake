@@ -12,6 +12,7 @@ Copy the creds-sample.json to creds.json and add the values for your environment
 
 In the database and schema from your credentials, using the same role as in the credentials, create table *employee* with the following SQL:
 
+```
 create or replace TABLE employee (
     EMPLOYEE_ID string primary key,
 	NAME VARCHAR(16777216),
@@ -21,3 +22,4 @@ create or replace TABLE employee (
     SALARY integer,
 	INSIDER BOOLEAN
 );
+```
