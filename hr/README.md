@@ -51,3 +51,5 @@ Provided that the Setup worked properly, you can finally run the app:
 ```
 streamlit run hr_app.py
 ```
+![App Screenshot](https://user-images.githubusercontent.com/73932533/225003126-be559854-6381-4c52-9e0c-dcd7e36bbb36.png)
+
