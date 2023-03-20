@@ -30,7 +30,16 @@ This demo uses 2 free datasets from the Snowflake Marketplace. Find them and cli
 - ESG Scores (S&P500 Sample), provided by ESG Book
 - Economy Data Atlas, provided by Knoema
 
+![ESG](https://user-images.githubusercontent.com/73932533/226289060-fd63ad2b-27e2-4f38-b0d3-cd743ee98ba2.png)
+![Knoema](https://user-images.githubusercontent.com/73932533/226289068-d765eb66-d604-442c-aceb-4560ccc08339.png)
+
+
 I put the ESG Scores dataset into the database called ```ESG``` and the Economy Data Atlas is in the ```ECONOMY_DATA_ATLAS``` database. If you chose different name for your databases, make sure you adjust the code in app.py for the database names, lines 20 and 115.
+
+Here's a quick video on how to get a dataset (click on the image):
+
+[![Get the ESG dataset from the Snowflake Marketplace](https://user-images.githubusercontent.com/73932533/226289060-fd63ad2b-27e2-4f38-b0d3-cd743ee98ba2.png)](https://youtu.be/0HWnh9HsmgM)
+
 
 
 # Run the app
