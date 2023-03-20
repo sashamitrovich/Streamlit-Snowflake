@@ -1,0 +1,8 @@
+{
+    "account": "<Snowflake account>",
+    "user": "<user name>",
+    "password": "*******",
+    "warehouse": "<Snowflake warehouse name>",
+    "database": "<DB name>",
+    "schema": "<schema name>"
+  }
