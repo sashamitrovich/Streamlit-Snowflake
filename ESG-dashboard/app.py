@@ -1,6 +1,4 @@
-from matplotlib import container
 import streamlit as st
-import pandas as pd
 import altair as alt
 
 from snowflake.snowpark import Session
@@ -12,14 +10,14 @@ import json
 # import uuid
 
 # connect to Snowflake
-with open('../creds/esg-creds.json') as fl:
+with open('creds.json') as fl:
     connection_parameters = json.load(fl)  
 session = Session.builder.configs(connection_parameters).create()
 
 st.write("# ESG Investment Analyzer :sunglasses:")
 
 # get ESG data from the marketplace
-scoreDf = session.table("TRIAL_SCO_ESG_262") # lazy evaluation
+scoreDf = session.table("ESG.SCORING.TRIAL_SCO_ESG_262") # lazy evaluation
 
 scoreWithRatingDf= scoreDf.withColumn('rating',
     f.when((f.col('"esg"') >= 0) & (f.col('"esg"') < 15),
