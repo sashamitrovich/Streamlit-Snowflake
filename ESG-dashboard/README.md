@@ -21,7 +21,7 @@ conda create --name esg -c https://repo.anaconda.com/pkgs/snowflake python=3.8 a
 conda activate esg 
 
 conda install streamlit
-
+```
 
 ## Getting the free datasets used in the demo from Snowflake Marketplace
 
@@ -30,7 +30,7 @@ This demo uses 2 free datasets from the Snowflake Marketplace. Find them and cli
 - ESG Scores (S&P500 Sample), provided by ESG Book
 - Economy Data Atlas, provided by Knoema
 
-I put the ESG Scores dataset into the database called "ESG" and the Economy Data Atlas is in the ECONOMY_DATA_ATLAS database. If you chose different name for your databases, make sure you adjust the code in app.py for the database names, lines 20 and 115.
+I put the ESG Scores dataset into the database called ```ESG``` and the Economy Data Atlas is in the ```ECONOMY_DATA_ATLAS``` database. If you chose different name for your databases, make sure you adjust the code in app.py for the database names, lines 20 and 115.
 
 
 # Run the app
