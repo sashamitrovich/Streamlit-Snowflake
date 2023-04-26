@@ -3,11 +3,19 @@
 # Setup
 
 To run the app, you'll need to
+- install neccessary Python packages (I use conda)
 - create a credentials file (creds.json)
 - create a table on Snowflake that the app is using to write data to
 - install all the dependency packages. I use the conda package manager for this but I trust you're doing here so I will not provide detailed instructions on how to do this
 - deploy the ML model for predicting a phantasy salary, based on the year of experience of an employee
 
+## Packages
+
+I use conda to create a virtual environment, the packages can also be installed using pip
+
+conda create --name hr -c <https://repo.anaconda.com/pkgs/snowflake> python=3.8 pandas snowflake-snowpark-python
+conda activate hr
+conda install -c conda-forge streamlit
 ## Credentials
 
 Copy the creds-sample.json to creds.json and add the values for your environment.
