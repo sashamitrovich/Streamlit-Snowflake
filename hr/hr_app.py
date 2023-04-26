@@ -1,7 +1,9 @@
 import streamlit as st
 import json
+import uuid
 
 from snowflake.snowpark import Session, version, Window, Row
+from snowflake.snowpark.functions import call_udf, col
 
 # connect to Snowflake
 with open('creds.json') as f: # check the creds-fake.json file for format
