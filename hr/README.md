@@ -13,9 +13,11 @@ To run the app, you'll need to
 
 I use conda to create a virtual environment, the packages can also be installed using pip
 
+```
 conda create --name hr -c <https://repo.anaconda.com/pkgs/snowflake> python=3.8 pandas snowflake-snowpark-python
 conda activate hr
 conda install -c conda-forge streamlit
+```
 
 ## Credentials
 
